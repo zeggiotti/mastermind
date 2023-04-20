@@ -22,7 +22,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   this.focus();
   
-  grid_offset = (displayWidth / 2)
+  grid_offset = (displayWidth / 2) - ((digits + 2) / 2);
 
   for(let i = 0; i < 4; i++){
     let r = Math.floor((Math.random() * 9) + 1);
@@ -39,7 +39,7 @@ function setup() {
     let row = [];
     for(let j = 0; j < digits + 2; j++){
       input = createInput();
-      input.position(origin_offset + btn_offset * j, origin_offset + btn_offset * i);
+      input.position(grid_offset + origin_offset + btn_offset * j, origin_offset + btn_offset * i);
       input.size(btn_size, btn_size);
       input.attribute('disabled', '');
       row.push(input);
