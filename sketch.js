@@ -17,7 +17,7 @@ let origin_offset = 80;
 let gameover = false;
 
 function setup() {
-  createCanvas(600, 700);
+  createCanvas(displayWidth, displayHeight);
   this.focus();
   
   for(let i = 0; i < 4; i++){
