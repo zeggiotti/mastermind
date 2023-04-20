@@ -48,6 +48,7 @@ function setup() {
       input.position(info_offset + width_offset + btn_offset * j, origin_offset + btn_offset * i);
       input.size(btn_size, btn_size);
       input.attribute('disabled', '');
+      input.addClass('text-box');
       row.push(input);
       
       info_offset = 0;

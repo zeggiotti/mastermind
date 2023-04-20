@@ -5,3 +5,8 @@ html, body {
 canvas {
   display: block;
 }
+
+.text-box {
+  text-align: center;
+  font-size: 28px;
+}
