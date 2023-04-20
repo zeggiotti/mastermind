@@ -19,10 +19,10 @@ let origin_offset = 80;
 let gameover = false;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(displayWidth, displayHeight);
   this.focus();
   
-  width_offset = (displayWidth / 3) - ((digits + 2) / 2);
+  width_offset = (windowWidth / 2) - (((digits + 2) * btn_offset) / 2);
 
   for(let i = 0; i < 4; i++){
     let r = Math.floor((Math.random() * 9) + 1);
