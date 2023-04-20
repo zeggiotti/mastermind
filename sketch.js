@@ -19,7 +19,7 @@ let origin_offset = 80;
 let gameover = false;
 
 function setup() {
-  createCanvas($(window).width(), $(window).height());
+  createCanvas(windowWidth, windowHeight);
   this.focus();
   
   width_offset = (displayWidth / 3) - ((digits + 2) / 2);
