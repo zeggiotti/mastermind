@@ -14,7 +14,7 @@ let current_digit = 0;
 let btn_offset = 60;
 let btn_size = 40;
 
-let origin_offset = 80;
+let origin_offset = 150;
 let info_offset = 0;
 
 let gameover = false;
@@ -108,7 +108,7 @@ function keyPressed(){
         current_digit--;
       }
       
-    } else if(keyCode == 13 && current_digit == digits - 1){
+    } else if(keyCode == 13 && current_digit == digits - 1 && board[attempt][current_digit].value() != ""){
       checkNumber();
       
       if(!gameover){
@@ -117,6 +117,10 @@ function keyPressed(){
 
         if(attempt == guesses){
           gameover = true;
+          
+          for(let i = 0; i < digits; i++){
+            board[attempt - 1][i].addClass('lost');
+          }
         }
       }
     }

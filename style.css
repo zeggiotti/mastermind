@@ -20,5 +20,9 @@ input:disabled {
 }
 
 .won {
-  background-color: green;
+  background-color: lightgreen;
+}
+
+.lost {
+  background-color: indianred;
 }
