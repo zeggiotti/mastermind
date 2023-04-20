@@ -72,6 +72,12 @@ function drawName(){
 function draw() {
   background(28);
   
+  textSize(15);
+  fill(200);
+  text("Your Guesses", width_offset, origin_offset - 20);
+  text("# Right\nDigits", width_offset + 40 + btn_offset * digits, origin_offset - 30);
+  text("# Right\nPositions", width_offset + 40 + btn_offset * (digits + 1), origin_offset - 30);
+  
   for(let i = 0; i < guesses; i++){
     for(let j = 0; j < digits + 2; j++){
       if(i == attempt && j == current_digit && j < digits){
