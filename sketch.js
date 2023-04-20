@@ -102,20 +102,22 @@ function keyPressed(){
       }
       
     } else if(keyCode == 8){
+      board[attempt][current_digit].value('');
       
       if(current_digit > 0){
-        board[attempt][current_digit].value('');
         current_digit--;
       }
       
     } else if(keyCode == 13 && current_digit == digits - 1){
       checkNumber();
       
-      current_digit = 0;
-      attempt++;
+      if(!gameover){
+        current_digit = 0;
+        attempt++;
 
-      if(attempt == guesses){
-        gameover = true;
+        if(attempt == guesses){
+          gameover = true;
+        }
       }
     }
     
@@ -155,9 +157,32 @@ function checkNumber(){
 
   if(guessed){
     console.log("indovinato!!");
+    
+    for(let i = 0; i < 10; i++){
+      confetti({
+        angle: randomInRange(55, 125),
+        spread: randomInRange(50, 70),
+        particleCount: randomInRange(50, 100),
+        origin: { y: 0.6 },
+      });
+    }
+    
     gameover = true;
+    
+    for(let i = 0; i < digits; i++){
+      board[attempt][i].addClass('won');
+    }
+    
+    board[attempt][current_digit].attribute('disabled', '');
+    
   }
   
   player_guess = [];
 }
+
+function randomInRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+
 

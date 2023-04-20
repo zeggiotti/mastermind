@@ -6,7 +6,19 @@ canvas {
   display: block;
 }
 
-.text-box {
+input {
   text-align: center;
   font-size: 28px;
+  border: 4px solid lightskyblue;
+  border-radius: 7px;
+  background-color: white;
+  color: black;
+}
+
+input:disabled {
+  border: 2px solid black;
+}
+
+.won {
+  background-color: green;
 }
