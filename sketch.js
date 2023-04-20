@@ -15,6 +15,7 @@ let btn_offset = 60;
 let btn_size = 40;
 
 let origin_offset = 80;
+let info_offset = 0;
 
 let gameover = false;
 
@@ -38,11 +39,19 @@ function setup() {
   for(let i = 0; i < guesses; i++){
     let row = [];
     for(let j = 0; j < digits + 2; j++){
+      
+      if(j >= digits){
+        info_offset = 40;
+      }
+      
       input = createInput();
-      input.position(width_offset + btn_offset * j, origin_offset + btn_offset * i);
+      input.position(info_offset + width_offset + btn_offset * j, origin_offset + btn_offset * i);
       input.size(btn_size, btn_size);
       input.attribute('disabled', '');
       row.push(input);
+      
+      info_offset = 0;
+      
     }
     board.push(row);
   }
@@ -60,7 +69,7 @@ function drawName(){
 }
 
 function draw() {
-  background(220);
+  background(28);
   
   for(let i = 0; i < guesses; i++){
     for(let j = 0; j < digits + 2; j++){
@@ -98,7 +107,7 @@ function keyPressed(){
         current_digit--;
       }
       
-    } else if(keyCode == 13 && current_digit == digits){
+    } else if(keyCode == 13 && current_digit == digits - 1){
       checkNumber();
       
       current_digit = 0;
