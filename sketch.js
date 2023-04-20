@@ -19,7 +19,7 @@ let origin_offset = 80;
 let gameover = false;
 
 function setup() {
-  createCanvas(displayWidth, displayHeight);
+  createCanvas(windowWidth, windowHeight);
   this.focus();
   
   width_offset = (windowWidth / 2) - (((digits + 2) * btn_offset) / 2);
