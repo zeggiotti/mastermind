@@ -86,7 +86,9 @@ function keyPressed(){
 
       if(current_digit < digits){
         board[attempt][current_digit].value(n);
-        current_digit++;
+        if(current_digit < digits - 1){
+          current_digit++;
+        }
       }
       
     } else if(keyCode == 8){
