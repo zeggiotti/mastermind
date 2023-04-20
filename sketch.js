@@ -4,6 +4,8 @@ let seq = [];
 let board = [];
 let player_guess = [];
 
+let grid_offset;
+
 let guesses = 10;
 let digits = 4;
 let attempt = 0;
@@ -17,9 +19,11 @@ let origin_offset = 80;
 let gameover = false;
 
 function setup() {
-  createCanvas(displayWidth, displayHeight);
+  createCanvas(windowWidth, windowHeight);
   this.focus();
   
+  grid_offset = (displayWidth / 2)
+
   for(let i = 0; i < 4; i++){
     let r = Math.floor((Math.random() * 9) + 1);
     if(!seq.includes(r)){
