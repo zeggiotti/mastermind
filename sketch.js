@@ -5,19 +5,21 @@ let board = [];
 let player_guess = [];
 
 let grid_offset;
-
-let guesses = 10;
-let digits = 4;
-let attempt = 0;
-let current_digit = 0;
-
 let btn_offset = 60;
 let btn_size = 40;
 
 let origin_offset = 150;
 let info_offset = 0;
 
+let guesses = 8;
+let digits = 4;
+
+let attempt = 0;
+let current_digit = 0;
 let gameover = false;
+
+let restartbtn;
+let digit_sel;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -25,7 +27,7 @@ function setup() {
   
   width_offset = (windowWidth / 2) - (((digits + 2) * btn_offset) / 2);
 
-  for(let i = 0; i < 4; i++){
+  for(let i = 0; i < digits; i++){
     let r = Math.floor((Math.random() * 9) + 1);
     if(!seq.includes(r)){
       seq[i] = r;
@@ -57,6 +59,11 @@ function setup() {
     board.push(row);
   }
   
+  restartbtn = createButton('Restart');
+  restartbtn.position(windowWidth / 2, origin_offset + btn_offset * guesses + 20);
+  restartbtn.addClass('button-11');
+  restartbtn.mousePressed(restart);
+  
   /*
   button = createButton("submit");
   button.position(30, 30);
@@ -77,6 +84,10 @@ function draw() {
   text("Your Guesses", width_offset, origin_offset - 20);
   text("# Right\nDigits", width_offset + 40 + btn_offset * digits, origin_offset - 30);
   text("# Right\nPositions", width_offset + 40 + btn_offset * (digits + 1), origin_offset - 30);
+  
+  let title = createElement('h1', 'Mastermind');
+  title.addClass('title');
+  title.position(width_offset,10);
   
   for(let i = 0; i < guesses; i++){
     for(let j = 0; j < digits + 2; j++){
@@ -194,5 +205,89 @@ function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+function restart(){
+  for(let i = 0; i < digits; i++){
+    let r = Math.floor((Math.random() * 9) + 1);
+    if(!seq.includes(r)){
+      seq[i] = r;
+    } else {
+      i -= 1;
+    }
+  }
+  
+  console.log(seq);
+  
+  for(let i = 0; i < guesses; i++){
+    for(let j = 0; j < digits + 2; j++){
+      board[i][j].value("");
+      if(board[i][j].hasClass('won')){
+        board[i][j].removeClass('won');
+      }
+      if(board[i][j].hasClass('lost')){
+        board[i][j].removeClass('lost');
+      }
+    }
+  }
+  
+  attempt = 0;
+  current_digit = 0;
+  gameover = false;
+}
 
+function selChanged(){
+  for(let i = 0; i < guesses; i++){
+    for(let j = 0; j < digits + 2; j++){
+      board[i][j].remove();
+    }
+  }
+  
+  digits = parseInt(digit_sel.value());
+  
+  width_offset = (windowWidth / 2) - (((digits + 2) * btn_offset) / 2);
+
+  for(let i = 0; i < 4; i++){
+    let r = Math.floor((Math.random() * 9) + 1);
+    if(!seq.includes(r)){
+      seq[i] = r;
+    } else {
+      i -= 1;
+    }
+  }
+  
+  console.log(seq);
+  
+  for(let i = 0; i < guesses; i++){
+    let row = [];
+    for(let j = 0; j < digits + 2; j++){
+      
+      if(j >= digits){
+        info_offset = 40;
+      }
+      
+      input = createInput();
+      input.position(info_offset + width_offset + btn_offset * j, origin_offset + btn_offset * i);
+      input.size(btn_size, btn_size);
+      input.attribute('disabled', '');
+      input.addClass('text-box');
+      row.push(input);
+      
+      info_offset = 0;
+      
+    }
+    board.push(row);
+  }
+  
+  restartbtn = createButton('Restart');
+  restartbtn.position(windowWidth / 2, origin_offset + btn_offset * guesses + 20);
+  restartbtn.mousePressed(restart);
+  
+  digit_sel = createSelect();
+  digit_sel.option('4');
+  digit_sel.option('5');
+  digit_sel.option('6');
+  digit_sel.option('7');
+  digit_sel.option('8');
+  digit_sel.position(width_offset - 150, origin_offset + 100);
+  digit_sel.changed(selChanged);
+}
 

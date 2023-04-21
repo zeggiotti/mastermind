@@ -1,2 +1,0 @@
-# mastermind
-Numerical MasterMind Game!!!
